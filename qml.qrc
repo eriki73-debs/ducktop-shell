@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>Output.qml</file>
+        <file>AppDrawer.qml</file>
+        <file>NotificationDrawer.qml</file>
+        <file>Lockscreen.qml</file>
+    </qresource>
+</RCC>
