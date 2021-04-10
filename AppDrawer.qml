@@ -8,7 +8,7 @@ import QtQuick.Layouts 1.14
 Drawer {
     id: bdrawer
     width: win.width
-    height: win.height - 30
+    height: win.height - 20
     edge: Qt.BottomEdge
     dragMargin: 20
     interactive: !comp.locked && (shellSurfaces.count != 0 || !visible)
@@ -87,7 +87,7 @@ Drawer {
         anchors.right: parent.right
         anchors.rightMargin: 10
         color: "white"
-        font.pixelSize: 52
+        font.pixelSize: 48
         font.family: "Lato"
         font.weight: Font.Light
         horizontalAlignment: Text.AlignLeft
@@ -102,15 +102,15 @@ Drawer {
         anchors.right: parent.right
         anchors.rightMargin: 10
         spacing: 10
-        height: win.width / 5 + 50
+        height: 124
         Repeater {
             model: JSON.parse(shellData.getConfigData())["apps"]
             Item {
                 Rectangle {
                     id: appIcon
                     color: "white"
-                    height: win.width / 5
-                    width: win.width / 5
+                    height: 96
+                    width: 96
                     MouseArea {
                         anchors.fill: parent
                         onClicked: {
@@ -123,11 +123,12 @@ Drawer {
                     anchors.top: appIcon.bottom
                     anchors.topMargin: 10
                     text: modelData["name"]
-                    font.pixelSize: 20
+                    font.pixelSize: 14
                     font.family: "Lato"
                     font.weight: Font.Light
                     wrapMode: Text.Wrap
                     color: "white"
+                    width: 96
                 }
             }
         }

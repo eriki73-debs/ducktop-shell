@@ -28,7 +28,7 @@ void DucktopShell::execApp(QString program, QStringList args)
 {
     qputenv("QT_QPA_PLATFORM", QByteArray("wayland"));
     qunsetenv("QT_IM_MODULE");
-    qputenv("QT_SCALE_FACTOR", QByteArray("2"));
+    //qputenv("QT_SCALE_FACTOR", QByteArray("2"));
 
     qputenv("WAYLAND_DISPLAY", wsocketname);
     if (!QProcess::startDetached(program, args))

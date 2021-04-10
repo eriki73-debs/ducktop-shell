@@ -27,7 +27,7 @@ Drawer {
         anchors.right: parent.right
         anchors.rightMargin: 10
         color: "white"
-        font.pixelSize: 52
+        font.pixelSize: 48
         font.family: "Lato"
         font.weight: Font.Light
         horizontalAlignment: Text.AlignLeft
@@ -39,7 +39,7 @@ Drawer {
         orientation: ListView.Vertical
         anchors.fill: parent
         anchors.margins: 10
-        anchors.topMargin: 72
+        anchors.topMargin: 68
         spacing: 10
 
         delegate: Rectangle {

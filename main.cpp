@@ -15,6 +15,7 @@ int main(int argc, char *argv[])
 
     shellData->loadConfig();
     shellData->engine.rootContext()->setContextProperty("shellData", shellData);
+    shellData->engine.rootContext()->setContextProperty("shellScaleFactor", qEnvironmentVariableIntValue("QT_SCALE_FACTOR"));
 
     new ShellAdaptor(shellData);
     new NotificationsAdaptor(notifid);

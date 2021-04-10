@@ -11,14 +11,14 @@ WaylandOutput {
     sizeFollowsWindow: true
     function handleShellSurface (xdgSurface, toplevel){
         shellSurfaces.append({shellSurface: xdgSurface});
-        toplevel.sendFullscreen(Qt.size(win.width, win.height));
+        toplevel.sendFullscreen(Qt.size(win.width * shellScaleFactor, (win.height - 20) * shellScaleFactor));
         swipeviewofwins.currentIndex = shellSurfaces.count - 1;
     }
 
     window: Window {
         id: win
-        width: 750
-        height: 1000
+        width: 400
+        height: 750
         visible: true
         color: "black"
 
@@ -39,7 +39,7 @@ WaylandOutput {
                     model: shellSurfaces
                     Item {
                         width: win.width
-                        height: win.height - (vkeyb.active ? vkeyb.height : 0) - 30
+                        height: win.height - (vkeyb.active ? vkeyb.height : 0) - 20
                         anchors.bottom: parent.bottom
                         anchors.bottomMargin: (vkeyb.active ? vkeyb.height : 0)
                         ShellSurfaceItem {
@@ -54,14 +54,14 @@ WaylandOutput {
             }
 
             Rectangle {
-                height: 30
+                height: 20
                 width: win.width
                 anchors.top: parent.top
                 anchors.left: parent.left
                 color: "black"
                 Text {
                     anchors.fill: parent
-                    font.pixelSize: 24
+                    font.pixelSize: 16
                     font.family: "Lato"
                     font.weight: Font.Light
                     horizontalAlignment: Text.AlignRight
@@ -71,7 +71,7 @@ WaylandOutput {
                 }
                 Text {
                     anchors.fill: parent
-                    font.pixelSize: 24
+                    font.pixelSize: 16
                     font.family: "Lato"
                     font.weight: Font.Light
                     horizontalAlignment: Text.AlignLeft
@@ -98,7 +98,7 @@ WaylandOutput {
 
                 onActiveChanged: {
                     for (var i = 0; i < shellSurfaces.count; i++) {
-                        shellSurfaces.get(i).shellSurface.toplevel.sendFullscreen(Qt.size(win.width, win.height - (vkeyb.active ? vkeyb.height : 0)));
+                        shellSurfaces.get(i).shellSurface.toplevel.sendFullscreen(Qt.size(win.width * shellScaleFactor, (win.height - (vkeyb.active ? vkeyb.height : 0) - 20)*shellScaleFactor));
                     }
                 }
             }
