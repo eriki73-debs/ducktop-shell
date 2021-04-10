@@ -36,6 +36,7 @@ int main(int argc, char *argv[])
     app.installEventFilter(btns);
 
     shellData->execApp("light", QString("-S 100").split(" "));
+    shellData->refreshBatteryInfo();
 
     return app.exec();
 }

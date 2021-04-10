@@ -11,7 +11,7 @@ bool HWButtons::eventFilter(QObject *, QEvent *ev)
       {
            QKeyEvent* keyEvent = (QKeyEvent*)ev;
 
-           if (keyEvent->key() == Qt::Key_PowerOff /*|| keyEvent->key() == Qt::Key_A*/)
+           if (keyEvent->key() == Qt::Key_PowerOff)
            {
                ((DucktopShell*)parent())->lock();
                return true;

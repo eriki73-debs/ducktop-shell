@@ -59,24 +59,63 @@ WaylandOutput {
                 anchors.top: parent.top
                 anchors.left: parent.left
                 color: "black"
+
                 Text {
-                    anchors.fill: parent
-                    font.pixelSize: 16
-                    font.family: "Lato"
-                    font.weight: Font.Light
-                    horizontalAlignment: Text.AlignRight
-                    id: clock
-                    text: comp.tstring
-                    color: "white"
-                }
-                Text {
-                    anchors.fill: parent
-                    font.pixelSize: 16
+                    anchors.left: parent.left
+                    anchors.top: parent.top
+                    font.pixelSize: 14
                     font.family: "Lato"
                     font.weight: Font.Light
                     horizontalAlignment: Text.AlignLeft
                     id: notificationCounter
                     text: "(" + notifications.count + ")"
+                    color: "white"
+                }
+
+                Text {
+                    anchors.right: batteryIndicator.left
+                    anchors.top: parent.top
+                    font.pixelSize: 14
+                    font.family: "Lato"
+                    font.weight: Font.Light
+                    horizontalAlignment: Text.AlignLeft
+                    id: batteryIndicatorText
+                    text: "(" + (comp.batteryInfo ? comp.batteryInfo.Percentage.toString() + " %" : "0 %") + ") "
+                    color: "white"
+                }
+
+                Rectangle {
+                    id: batteryIndicator
+                    anchors.right: clock.left
+                    anchors.top: parent.top
+                    anchors.margins: 3
+                    width: 26
+                    height: 10
+                    color: "black"
+                    border.color: "white"
+                    border.width: 1
+                    radius: 4
+
+                    Rectangle {
+                        anchors.left: parent.left
+                        anchors.top: parent.top
+                        anchors.bottom: parent.bottom
+                        anchors.margins: 3
+                        width: comp.batteryInfo ? 20 * comp.batteryInfo.Percentage / 100 : 0
+                        radius: 2
+                        color: comp.batteryInfo ? (comp.batteryInfo.State === 1 ? "green" : "white"): "black"
+                    }
+                }
+
+                Text {
+                    anchors.right: parent.right
+                    anchors.top: parent.top
+                    font.pixelSize: 14
+                    font.family: "Lato"
+                    font.weight: Font.Light
+                    horizontalAlignment: Text.AlignRight
+                    id: clock
+                    text: " " + comp.tstring
                     color: "white"
                 }
             }

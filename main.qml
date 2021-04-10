@@ -19,8 +19,13 @@ WaylandCompositor {
         }
     }
 
+    function refreshBatteryInfo(info) {
+        batteryInfo = info
+    }
+
     property bool locked: true
     property bool closed: false
+    property var batteryInfo
 
     function lock() {
         closed = !closed;

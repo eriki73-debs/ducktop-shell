@@ -47,4 +47,8 @@ notifications.header_flags = -l Notifications -i notifications.h
 DBUS_ADAPTORS += fi.erikinkinen.ducktop.shell.xml \
     notifications
 DBUS_INTERFACES += fi.erikinkinen.ducktop.shell.xml \
-    notifications
+    notifications \
+    org.freedesktop.UPower.xml
+
+DISTFILES += \
+    org.freedesktop.UPower.xml

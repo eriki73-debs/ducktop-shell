@@ -11,6 +11,8 @@
 #include <QDebug>
 #include <QTextCodec>
 
+#include "upower_interface.h"
+
 class DucktopShell : public QObject{
     Q_OBJECT
     Q_CLASSINFO("D-Bus Interface", "fi.erikinkinen.ducktop.shell")
@@ -19,7 +21,7 @@ private:
     QByteArray configData;
     QByteArray wsocketname;
     int currentNotificationId = 1;
-
+    org::freedesktop::DBus::Properties *upower_properties;
 public:
     QQmlApplicationEngine engine;
     Q_INVOKABLE QByteArray getConfigData();
@@ -29,10 +31,12 @@ public:
     Q_INVOKABLE void execApp(QString program, QStringList args);
     Q_INVOKABLE void lock();
     Q_INVOKABLE void changeOpName(QString name);
-    explicit DucktopShell (QObject* parent = 0) : QObject(parent) {}
+    void refreshBatteryInfo();
+    DucktopShell (QObject* parent = 0);
 public Q_SLOTS:
     void notification(QString title, QString body, int id);
     void delnotification(int id);
+    void onUPowerInfoChanged(QString interface, QVariantMap, QStringList);
 };
 
 #endif // DUCKTOPSHELL_H

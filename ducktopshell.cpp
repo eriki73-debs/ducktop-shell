@@ -1,5 +1,11 @@
 #include "ducktopshell.h"
 
+DucktopShell::DucktopShell(QObject *parent) : QObject(parent) {
+    upower_properties = new org::freedesktop::DBus::Properties("org.freedesktop.UPower", "/org/freedesktop/UPower/devices/DisplayDevice",
+                               QDBusConnection::systemBus(), this);
+    connect(upower_properties, SIGNAL(PropertiesChanged(QString, QVariantMap, QStringList)), this, SLOT(onUPowerInfoChanged(QString, QVariantMap, QStringList)));
+}
+
 QByteArray DucktopShell::getConfigData() {
     return configData;
 }
@@ -49,4 +55,15 @@ void DucktopShell::lock() {
 
 void DucktopShell::changeOpName(QString name) {
     QMetaObject::invokeMethod(engine.rootObjects()[0], "changeOpName", Q_ARG(QVariant, name));
+}
+
+void DucktopShell::refreshBatteryInfo() {
+    QVariantMap upower_display = upower_properties->GetAll("org.freedesktop.UPower.Device");
+    QMetaObject::invokeMethod(engine.rootObjects()[0], "refreshBatteryInfo", Q_ARG(QVariant, upower_display));
+}
+
+void DucktopShell::onUPowerInfoChanged(QString interface, QVariantMap, QStringList) {
+    if (interface == "org.freedesktop.UPower.Device") {
+        refreshBatteryInfo();
+    }
 }
