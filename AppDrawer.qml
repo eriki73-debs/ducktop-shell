@@ -35,17 +35,18 @@ Drawer {
         anchors.leftMargin: 10
         anchors.right: parent.right
         anchors.rightMargin: 10
-        height: (shellSurfaces.count != 0) ? win.height / 3 : 0
+        height: (shellSurfaces.count != 0) ? (win.height / 3 + 35) : 0
         spacing: 10
         visible: shellSurfaces.count != 0
 
-        delegate: WaylandQuickItem {
-            width: win.width / 3
-            height: win.height / 3
-            surface: modelData.surface
-            sizeFollowsSurface: false
-            inputEventsEnabled: false
+        delegate: Rectangle {
             opacity: 1 + y/height
+            width: win.width / 3
+            height: win.height / 3 + 35
+            color: "transparent"
+            border.color: "white"
+            border.width: 1
+            radius: 10
             MouseArea {
                 anchors.fill: parent
 
@@ -63,16 +64,36 @@ Drawer {
                     bdrawer.position = 0
                 }
             }
+            WaylandQuickItem {
+                anchors.fill: parent
+                anchors.bottomMargin: 35
+                anchors.margins: 6
+                surface: modelData.surface
+                sizeFollowsSurface: false
+                inputEventsEnabled: false
+            }
+            Text {
+                anchors.bottom: parent.bottom
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.margins: 11
+                text: modelData.toplevel.title
+                font.pixelSize: 14
+                font.family: "Lato"
+                font.weight: Font.Light
+                clip: true
+                color: "white"
+            }
         }
     }
 
     Rectangle {
         id: bdrawerSeparator
         anchors.top: openAppGrid.bottom
-        anchors.topMargin: 10
+        anchors.margins: 20
         anchors.left: parent.left
         anchors.right: parent.right
-        height: 2
+        height: 1
         color: "white"
         visible: shellSurfaces.count != 0
     }
@@ -81,7 +102,6 @@ Drawer {
         id: launchAppGridHeader
         text: qsTr("Apps")
         anchors.top: bdrawerSeparator.bottom
-        anchors.topMargin: 10
         anchors.left: parent.left
         anchors.leftMargin: 10
         anchors.right: parent.right
@@ -102,15 +122,15 @@ Drawer {
         anchors.right: parent.right
         anchors.rightMargin: 10
         spacing: 10
-        height: 124
+        height: 106
         model: launcherApps
         orientation: ListView.Horizontal
         delegate: Item {
-            width: 64
+            width: 72
             Button {
                 id: appIconButton
-                height: 64
-                width: 64
+                height: 72
+                width: 72
                 icon.name: appIcon
                 icon.color: "transparent"
                 icon.height: 64
@@ -133,7 +153,7 @@ Drawer {
                 font.weight: Font.Light
                 clip: true
                 color: "white"
-                width: 64
+                width: 72
             }
         }
     }
