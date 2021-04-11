@@ -30,7 +30,7 @@ WaylandCompositor {
     function lock() {
         closed = !closed;
         locked = true;
-        shellData.execApp("light", ["-s", "sysfs/backlight/auto", "-S", closed ? "0" : "100"])
+        shellData.execApp("light -s sysfs/backlight/auto -S " + (closed ? "0" : "100"))
     }
 
     property int hours
@@ -63,6 +63,13 @@ WaylandCompositor {
         shellData.setWsocketname(socketName);
     }
 
+    function addApp(name, exec) {
+        launcherApps.append({
+                        appName: name,
+                        appExec: exec
+                    })
+    }
+
     Output {
         id: outp
     }
@@ -74,5 +81,6 @@ WaylandCompositor {
     }
     ListModel { id: shellSurfaces }
     ListModel { id: notifications }
+    ListModel { id: launcherApps }
     TextInputManager {}
 }

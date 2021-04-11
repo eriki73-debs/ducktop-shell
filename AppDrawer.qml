@@ -11,7 +11,7 @@ Drawer {
     height: win.height - 20
     edge: Qt.BottomEdge
     dragMargin: 20
-    interactive: !comp.locked && (shellSurfaces.count != 0 || !visible)
+    interactive: !comp.locked && (shellSurfaces.count != 0 || position != 1.0)
     visible: true
     z: 100
     modal: false
@@ -103,33 +103,33 @@ Drawer {
         anchors.rightMargin: 10
         spacing: 10
         height: 124
-        Repeater {
-            model: JSON.parse(shellData.getConfigData())["apps"]
-            Item {
-                Rectangle {
-                    id: appIcon
-                    color: "white"
-                    height: 96
-                    width: 96
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: {
-                            shellData.execApp(modelData['program'], modelData['args']);
-                            bdrawer.position = 0
-                        }
+        model: launcherApps
+        orientation: ListView.Horizontal
+        delegate: Item {
+            width: 64
+            Rectangle {
+                id: appIcon
+                color: "white"
+                height: 64
+                width: 64
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        shellData.execApp(appExec);
+                        bdrawer.position = 0
                     }
                 }
-                Text {
-                    anchors.top: appIcon.bottom
-                    anchors.topMargin: 10
-                    text: modelData["name"]
-                    font.pixelSize: 14
-                    font.family: "Lato"
-                    font.weight: Font.Light
-                    wrapMode: Text.Wrap
-                    color: "white"
-                    width: 96
-                }
+            }
+            Text {
+                anchors.top: appIcon.bottom
+                anchors.topMargin: 10
+                text: appName
+                font.pixelSize: 14
+                font.family: "Lato"
+                font.weight: Font.Light
+                clip: true
+                color: "white"
+                width: 64
             }
         }
     }

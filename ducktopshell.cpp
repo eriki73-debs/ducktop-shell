@@ -30,14 +30,17 @@ bool DucktopShell::loadConfig()
     return true;
 }
 
-void DucktopShell::execApp(QString program, QStringList args)
+void DucktopShell::execApp(QString command)
 {
     qputenv("QT_QPA_PLATFORM", QByteArray("wayland"));
     qunsetenv("QT_IM_MODULE");
     //qputenv("QT_SCALE_FACTOR", QByteArray("2"));
 
     qputenv("WAYLAND_DISPLAY", wsocketname);
-    if (!QProcess::startDetached(program, args))
+    QStringList args = QStringList();
+    args.append("-c");
+    args.append(command);
+    if (!QProcess::startDetached("bash", args))
         qDebug() << "Failed to run";
 }
 
@@ -65,5 +68,31 @@ void DucktopShell::refreshBatteryInfo() {
 void DucktopShell::onUPowerInfoChanged(QString interface, QVariantMap, QStringList) {
     if (interface == "org.freedesktop.UPower.Device") {
         refreshBatteryInfo();
+    }
+}
+
+void DucktopShell::loadAppList() {
+    QString xdgDataDirs = QTextCodec::codecForMib(106)->toUnicode(qgetenv("XDG_DATA_DIRS"));
+    QStringList dataDirList = xdgDataDirs.split(':');
+    for (int dirI = 0; dirI < dataDirList.count(); dirI++) {
+        QDir *curAppDir = new QDir(dataDirList.at(dirI) + "/applications");
+        if (curAppDir->exists()) {
+            QStringList entryFiles = curAppDir->entryList(QDir::Files);
+            for (int fileI = 0; fileI < entryFiles.count(); fileI++) {
+                QString curEntryFileName = entryFiles.at(fileI);
+                QSettings *curEntryFile = new QSettings(dataDirList.at(dirI) + "/applications/" + curEntryFileName, QSettings::IniFormat);
+                QString desktopType = curEntryFile->value("Desktop Entry/Type").toString();
+                if (desktopType == "Application") {
+                    QString appName = curEntryFile->value("Desktop Entry/Name").toString();
+                    QString appHidden = curEntryFile->value("Desktop Entry/Hidden").toString();
+                    QString appNoDisplay = curEntryFile->value("Desktop Entry/NoDisplay").toString();
+                    QString appExec = curEntryFile->value("Desktop Entry/Exec").toString();
+                    if (appName != "" && appExec != "" && appHidden != "true" && appNoDisplay != "true")
+                        QMetaObject::invokeMethod(engine.rootObjects()[0], "addApp", Q_ARG(QVariant, appName), Q_ARG(QVariant, appExec));
+                }
+                delete curEntryFile;
+            }
+        }
+        delete curAppDir;
     }
 }

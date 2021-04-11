@@ -28,10 +28,11 @@ public:
     Q_INVOKABLE QByteArray getWsocketname();
     Q_INVOKABLE void setWsocketname(QByteArray name);
     bool loadConfig();
-    Q_INVOKABLE void execApp(QString program, QStringList args);
+    Q_INVOKABLE void execApp(QString command);
     Q_INVOKABLE void lock();
     Q_INVOKABLE void changeOpName(QString name);
     void refreshBatteryInfo();
+    void loadAppList();
     DucktopShell (QObject* parent = 0);
 public Q_SLOTS:
     void notification(QString title, QString body, int id);

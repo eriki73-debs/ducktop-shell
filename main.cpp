@@ -8,6 +8,9 @@ int main(int argc, char *argv[])
 {
     qputenv("QT_IM_MODULE", QByteArray("qtvirtualkeyboard"));
 
+    qApp->setApplicationName("Ducktop Shell");
+    qApp->setOrganizationName("Erik Inkinen");
+
     QGuiApplication app(argc, argv);
 
     DucktopShell *shellData = new DucktopShell(&app);
@@ -35,8 +38,9 @@ int main(int argc, char *argv[])
     HWButtons *btns = new HWButtons(shellData);
     app.installEventFilter(btns);
 
-    shellData->execApp("light", QString("-S 100").split(" "));
+    shellData->execApp("light -S 100");
     shellData->refreshBatteryInfo();
+    shellData->loadAppList();
 
     return app.exec();
 }
