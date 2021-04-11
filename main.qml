@@ -63,10 +63,11 @@ WaylandCompositor {
         shellData.setWsocketname(socketName);
     }
 
-    function addApp(name, exec) {
+    function addApp(name, exec, icon) {
         launcherApps.append({
                         appName: name,
-                        appExec: exec
+                        appExec: exec,
+                        appIcon: icon
                     })
     }
 

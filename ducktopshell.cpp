@@ -87,8 +87,9 @@ void DucktopShell::loadAppList() {
                     QString appHidden = curEntryFile->value("Desktop Entry/Hidden").toString();
                     QString appNoDisplay = curEntryFile->value("Desktop Entry/NoDisplay").toString();
                     QString appExec = curEntryFile->value("Desktop Entry/Exec").toString();
+                    QString appIcon = curEntryFile->value("Desktop Entry/Icon").toString();
                     if (appName != "" && appExec != "" && appHidden != "true" && appNoDisplay != "true")
-                        QMetaObject::invokeMethod(engine.rootObjects()[0], "addApp", Q_ARG(QVariant, appName), Q_ARG(QVariant, appExec));
+                        QMetaObject::invokeMethod(engine.rootObjects()[0], "addApp", Q_ARG(QVariant, appName), Q_ARG(QVariant, appExec), Q_ARG(QVariant, appIcon));
                 }
                 delete curEntryFile;
             }

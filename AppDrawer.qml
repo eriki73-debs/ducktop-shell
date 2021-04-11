@@ -107,21 +107,25 @@ Drawer {
         orientation: ListView.Horizontal
         delegate: Item {
             width: 64
-            Rectangle {
-                id: appIcon
-                color: "white"
+            Button {
+                id: appIconButton
                 height: 64
                 width: 64
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        shellData.execApp(appExec);
-                        bdrawer.position = 0
-                    }
+                icon.name: appIcon
+                icon.color: "transparent"
+                icon.height: 64
+                icon.width: 64
+                background: Rectangle {
+                    color: "transparent"
+                }
+
+                onClicked: {
+                    shellData.execApp(appExec);
+                    bdrawer.position = 0
                 }
             }
             Text {
-                anchors.top: appIcon.bottom
+                anchors.top: appIconButton.bottom
                 anchors.topMargin: 10
                 text: appName
                 font.pixelSize: 14
