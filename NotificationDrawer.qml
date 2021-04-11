@@ -11,7 +11,7 @@ Drawer {
     height: win.height
     edge: Qt.TopEdge
     interactive: !comp.locked
-    dragMargin: 30
+    dragMargin: 30 * shellScaleFactor
     z: 200
     background: Rectangle{
         color:"black"
@@ -21,13 +21,13 @@ Drawer {
         id: notificationListHeader
         text: qsTr("Notifications")
         anchors.top: parent.top
-        anchors.topMargin: 10
+        anchors.topMargin: 10 * shellScaleFactor
         anchors.left: parent.left
-        anchors.leftMargin: 10
+        anchors.leftMargin: 10 * shellScaleFactor
         anchors.right: parent.right
-        anchors.rightMargin: 10
+        anchors.rightMargin: 10 * shellScaleFactor
         color: "white"
-        font.pixelSize: 48
+        font.pixelSize: 36 * shellScaleFactor
         font.family: "Lato"
         font.weight: Font.Light
         horizontalAlignment: Text.AlignLeft
@@ -38,17 +38,17 @@ Drawer {
         model: notifications
         orientation: ListView.Vertical
         anchors.fill: parent
-        anchors.margins: 10
-        anchors.topMargin: 68
-        spacing: 10
+        anchors.margins: 10 * shellScaleFactor
+        anchors.topMargin: 68 * shellScaleFactor
+        spacing: 10 * shellScaleFactor
 
         delegate: Rectangle {
             width: notificationList.width
-            height: titleText.height + bodyText.height + 30 * (1 - Math.abs(x/width))
+            height: titleText.height + bodyText.height + 30 * shellScaleFactor * (1 - Math.abs(x/width))
             color: "black"
             border.color: "white"
             border.width: 1
-            radius: 10
+            radius: 10 * shellScaleFactor
             opacity: 1 - Math.abs(x/width)
 
             MouseArea {
@@ -70,12 +70,12 @@ Drawer {
                 color: "white"
                 text: title
                 anchors.left: parent.left
-                anchors.leftMargin: 10
+                anchors.leftMargin: 10 * shellScaleFactor
                 anchors.right: parent.right
-                anchors.rightMargin: 10
+                anchors.rightMargin: 10 * shellScaleFactor
                 anchors.top: parent.top
-                anchors.topMargin: 10 * (1 - Math.abs(parent.x/parent.width))
-                font.pixelSize: 32 * (1 - Math.abs(parent.x/parent.width))
+                anchors.topMargin: 10 * shellScaleFactor * (1 - Math.abs(parent.x/parent.width))
+                font.pixelSize: 32 * shellScaleFactor * (1 - Math.abs(parent.x/parent.width))
                 font.bold: true
                 wrapMode: Text.Wrap
             }
@@ -85,12 +85,12 @@ Drawer {
                 color: "white"
                 text: body
                 anchors.left: parent.left
-                anchors.leftMargin: 10
+                anchors.leftMargin: 10 * shellScaleFactor
                 anchors.right: parent.right
-                anchors.rightMargin: 10
+                anchors.rightMargin: 10 * shellScaleFactor
                 anchors.top: titleText.bottom
-                anchors.topMargin: 10 * (1 - Math.abs(parent.x/parent.width))
-                font.pixelSize: 24 * (1 - Math.abs(parent.x/parent.width))
+                anchors.topMargin: 10 * shellScaleFactor * (1 - Math.abs(parent.x/parent.width))
+                font.pixelSize: 24 * shellScaleFactor * (1 - Math.abs(parent.x/parent.width))
                 wrapMode: Text.Wrap
             }
         }

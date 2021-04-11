@@ -34,8 +34,7 @@ void DucktopShell::execApp(QString command)
 {
     qputenv("QT_QPA_PLATFORM", QByteArray("wayland"));
     qunsetenv("QT_IM_MODULE");
-    //qputenv("QT_SCALE_FACTOR", QByteArray("2"));
-
+    qputenv("QT_SCALE_FACTOR", this->engine.rootContext()->contextProperty("shellScaleFactor").toString().toUtf8());
     qputenv("WAYLAND_DISPLAY", wsocketname);
     QStringList args = QStringList();
     args.append("-c");

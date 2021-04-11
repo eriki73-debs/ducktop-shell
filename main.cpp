@@ -6,6 +6,9 @@
 
 int main(int argc, char *argv[])
 {
+    int shellScaleFactor = qEnvironmentVariableIntValue("QT_SCALE_FACTOR");
+    qunsetenv("QT_SCALE_FACTOR");
+
     qputenv("QT_IM_MODULE", QByteArray("qtvirtualkeyboard"));
 
     qApp->setApplicationName("Ducktop Shell");
@@ -18,7 +21,7 @@ int main(int argc, char *argv[])
 
     shellData->loadConfig();
     shellData->engine.rootContext()->setContextProperty("shellData", shellData);
-    shellData->engine.rootContext()->setContextProperty("shellScaleFactor", qEnvironmentVariableIntValue("QT_SCALE_FACTOR"));
+    shellData->engine.rootContext()->setContextProperty("shellScaleFactor", shellScaleFactor);
 
     new ShellAdaptor(shellData);
     new NotificationsAdaptor(notifid);

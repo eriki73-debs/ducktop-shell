@@ -18,9 +18,9 @@ Drawer {
 
     Text {
         anchors.fill: parent
-        anchors.margins: 20
+        anchors.margins: 20 * shellScaleFactor
         text: qsTr("Swipe up to unlock")
-        font.pixelSize: 24
+        font.pixelSize: 24 * shellScaleFactor
         font.family: "Lato"
         font.weight: Font.Light
         verticalAlignment: Text.AlignBottom
@@ -32,7 +32,7 @@ Drawer {
     Text {
         anchors.fill: parent
         text: comp.tstring
-        font.pixelSize: 64
+        font.pixelSize: 64 * shellScaleFactor
         font.family: "Lato"
         font.weight: Font.ExtraLight
         verticalAlignment: Text.AlignVCenter
@@ -43,9 +43,9 @@ Drawer {
 
     Text {
         anchors.fill: parent
-        anchors.topMargin: 128
+        anchors.topMargin: 128 * shellScaleFactor
         text: comp.dstring
-        font.pixelSize: 24
+        font.pixelSize: 24 * shellScaleFactor
         font.family: "Lato"
         font.weight: Font.Light
         verticalAlignment: Text.AlignVCenter
