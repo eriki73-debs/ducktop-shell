@@ -5,14 +5,11 @@ Priority: optional
 Build-Depends: pkg-kde-tools,
                qt5-qmake,
                qtbase5-gles-dev,
-               qtwayland5-dev,
                qtdeclarative5-dev,
                libqt5quick5-gles,
                libqt5gui5-gles,
                pkg-config,
-               libudev-dev,
-               libwayland-server0,
-               libwayland-dev
+               libudev-dev
 Standards-Version: 4.5.1
 
 Package: ducktop-shell
