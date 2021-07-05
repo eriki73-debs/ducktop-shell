@@ -35,14 +35,18 @@ Drawer {
         anchors.leftMargin: 10 * shellScaleFactor
         anchors.right: parent.right
         anchors.rightMargin: 10 * shellScaleFactor
-        height: (shellSurfaces.count != 0) ? (win.height / 3 + 35 * shellScaleFactor) : 0
-        spacing: 10 * shellScaleFactor
+        height: (shellSurfaces.count != 0) ? (win.height / 2 + 35 * shellScaleFactor) : 0
+        spacing: win.width / 8
         visible: shellSurfaces.count != 0
+        preferredHighlightBegin: win.width / 4
+        preferredHighlightEnd: 3 * win.width / 4
+        highlightRangeMode: ListView.StrictlyEnforceRange
 
         delegate: Rectangle {
             opacity: 1 + y/height
-            width: win.width / 3
-            height: win.height / 3 + 35 * shellScaleFactor
+            y: openAppGrid.currentIndex == index ? 0 : win.height / 12
+            width: win.width / (openAppGrid.currentIndex == index ? 2 : 3)
+            height: win.height / (openAppGrid.currentIndex == index ? 2 : 3) + 35 * shellScaleFactor
             color: "transparent"
             border.color: "white"
             border.width: 1
