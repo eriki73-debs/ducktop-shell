@@ -51,18 +51,24 @@ Drawer {
             border.color: "white"
             border.width: 1
             radius: 10 * shellScaleFactor
+
+            onHeightChanged: {
+                y = openAppGrid.currentIndex == index ? 0 : win.height / 12
+            }
+
             MouseArea {
                 anchors.fill: parent
 
                 drag.target: parent
                 drag.axis: Drag.YAxis
-                drag.maximumY: 0
+                drag.maximumY: openAppGrid.currentIndex == index ? 0 : win.height / 12
 
                 onReleased: {
                     if (parent.y < - parent.height/2) {
                         modelData.toplevel.sendClose()
                         return
                     }
+                    openAppGrid.currentIndex = index
                     parent.y = 0
                     swipeviewofwins.currentIndex = index
                     bdrawer.position = 0
