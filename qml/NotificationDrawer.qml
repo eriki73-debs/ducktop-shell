@@ -21,7 +21,7 @@ Drawer {
         id: notificationListHeader
         text: qsTr("Notifications")
         anchors.top: parent.top
-        anchors.topMargin: 10 * shellScaleFactor
+        anchors.topMargin: 40 * shellScaleFactor
         anchors.left: parent.left
         anchors.leftMargin: 10 * shellScaleFactor
         anchors.right: parent.right
@@ -39,7 +39,7 @@ Drawer {
         orientation: ListView.Vertical
         anchors.fill: parent
         anchors.margins: 10 * shellScaleFactor
-        anchors.topMargin: 68 * shellScaleFactor
+        anchors.topMargin: 100 * shellScaleFactor
         spacing: 10 * shellScaleFactor
 
         delegate: Rectangle {
@@ -75,7 +75,7 @@ Drawer {
                 anchors.rightMargin: 10 * shellScaleFactor
                 anchors.top: parent.top
                 anchors.topMargin: 10 * shellScaleFactor * (1 - Math.abs(parent.x/parent.width))
-                font.pixelSize: 32 * shellScaleFactor * (1 - Math.abs(parent.x/parent.width))
+                font.pixelSize: 24 * shellScaleFactor * (1 - Math.abs(parent.x/parent.width))
                 font.bold: true
                 wrapMode: Text.Wrap
             }
@@ -90,7 +90,7 @@ Drawer {
                 anchors.rightMargin: 10 * shellScaleFactor
                 anchors.top: titleText.bottom
                 anchors.topMargin: 10 * shellScaleFactor * (1 - Math.abs(parent.x/parent.width))
-                font.pixelSize: 24 * shellScaleFactor * (1 - Math.abs(parent.x/parent.width))
+                font.pixelSize: 18 * shellScaleFactor * (1 - Math.abs(parent.x/parent.width))
                 wrapMode: Text.Wrap
             }
         }

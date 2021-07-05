@@ -48,6 +48,7 @@ WaylandOutput {
                             shellSurface: modelData
                             onSurfaceDestroyed: shellSurfaces.remove(index)
                             sizeFollowsSurface: false
+                            touchEventsEnabled: (appDrawer.position == 0.0) && (notificationDrawer.position == 0.0)
                         }
                     }
                 }
@@ -62,8 +63,9 @@ WaylandOutput {
 
                 Text {
                     anchors.left: parent.left
+                    anchors.leftMargin: 25 * shellScaleFactor
                     anchors.top: parent.top
-                    font.pixelSize: 14 * shellScaleFactor
+                    font.pixelSize: 12 * shellScaleFactor
                     font.family: "Lato"
                     font.weight: Font.Light
                     horizontalAlignment: Text.AlignLeft
@@ -75,7 +77,7 @@ WaylandOutput {
                 Text {
                     anchors.right: batteryIndicator.left
                     anchors.top: parent.top
-                    font.pixelSize: 14 * shellScaleFactor
+                    font.pixelSize: 12 * shellScaleFactor
                     font.family: "Lato"
                     font.weight: Font.Light
                     horizontalAlignment: Text.AlignLeft
@@ -90,7 +92,7 @@ WaylandOutput {
                     anchors.top: parent.top
                     anchors.margins: 3 * shellScaleFactor
                     width: 22 * shellScaleFactor
-                    height: 10 * shellScaleFactor
+                    height: 8 * shellScaleFactor
                     color: "black"
                     border.color: "white"
                     border.width: 1 * shellScaleFactor
@@ -109,8 +111,9 @@ WaylandOutput {
 
                 Text {
                     anchors.right: parent.right
+                    anchors.rightMargin: 25 * shellScaleFactor
                     anchors.top: parent.top
-                    font.pixelSize: 14 * shellScaleFactor
+                    font.pixelSize: 12 * shellScaleFactor
                     font.family: "Lato"
                     font.weight: Font.Light
                     horizontalAlignment: Text.AlignRight
