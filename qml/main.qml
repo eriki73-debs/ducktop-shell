@@ -30,7 +30,8 @@ WaylandCompositor {
     function lock() {
         closed = !closed;
         locked = true;
-        shellData.execApp("light -s sysfs/backlight/auto -S " + (closed ? "0" : "100"))
+        backlight.setBrightness((closed ? "0" : backlight.getMaxBrightness().toString()))
+        //shellData.execApp("light -s sysfs/backlight/auto -S " + (closed ? "0" : "100"))
     }
 
     property int hours

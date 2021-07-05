@@ -14,15 +14,18 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+        backlight.cpp \
         ducktopshell.cpp \
         hwbuttons.cpp \
         main.cpp \
         notifications.cpp
 
-RESOURCES += qml.qrc
+RESOURCES += qml/qml.qrc
 
 TRANSLATIONS += \
     ducktop-shell_en_US.ts
+
+LIBS += -ludev
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
@@ -36,6 +39,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
+    backlight.h \
     ducktopshell.h \
     hwbuttons.h \
     notifications.h
@@ -44,11 +48,7 @@ notifications.files = org.freedesktop.Notifications.xml
 notifications.source_flags = -l Notifications
 notifications.header_flags = -l Notifications -i notifications.h
 
-DBUS_ADAPTORS += fi.erikinkinen.ducktop.shell.xml \
-    notifications
-DBUS_INTERFACES += fi.erikinkinen.ducktop.shell.xml \
-    notifications \
-    org.freedesktop.UPower.xml
-
-DISTFILES += \
-    org.freedesktop.UPower.xml
+DBUS_ADAPTORS += notifications
+DBUS_INTERFACES += notifications \
+    org.freedesktop.DBus.xml \
+    org.freedesktop.login1.xml

@@ -11,11 +11,10 @@
 #include <QDebug>
 #include <QTextCodec>
 
-#include "upower_interface.h"
+#include "dbus_interface.h"
 
 class DucktopShell : public QObject{
     Q_OBJECT
-    Q_CLASSINFO("D-Bus Interface", "fi.erikinkinen.ducktop.shell")
 private:
     QJsonDocument configJson;
     QByteArray configData;
