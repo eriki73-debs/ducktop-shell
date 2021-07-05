@@ -1,1 +1,2 @@
-bin/ducktop-shell
+bin/ducktop-shell /bin/
+logind.conf.d/10-ducktop.conf /etc/systemd/logind.conf.d/
